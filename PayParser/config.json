@@ -1,0 +1,59 @@
+{
+    "ExportName" : "Parsed_Invoices.csv",
+    "PdfToText" : "pdftotext.exe",
+    "DisplayStatuses" : true,
+    "FillDateGapWithZeros" : true,
+    "//StartDate": "2020/01",
+    "Separator" : ";",
+    "Expressions": 
+    [
+        {
+            "Column": "net",
+            "Variations": 
+            [
+                {
+                    "Culture": "en-US",
+                    "Regex": "\\sNet à payer avant impôt sur le revenu\\s(?<net>[\\d\\s]+.\\d\\d)",
+                    "Group": "net"
+                },
+                {
+                    "Culture": "fr-FR",
+                    "Regex": "\\s(?i)net\\s*a\\s*payer\\s*(?<net>[\\d\\s]+.\\d\\d)\\seur",
+                    "Group": "net"
+                }
+            ]
+        },
+        {
+            "Column": "brut",
+            "Variations": 
+            [
+                {
+                    "Culture": "en-US",
+                    "Regex": "\\sSalaire brut\\s*(?<brut>[\\d\\s]+.\\d\\d)",
+                    "Group": "brut"
+                },
+                {
+                    "Culture": "fr-FR",
+                    "Regex": "\\sBRUT\\s*(?<brut>[\\d\\s]+.\\d\\d)",
+                    "Group": "brut"
+                }
+            ]
+        },
+        {
+            "Column": "date",
+            "Variations": 
+            [
+                {
+                    "Culture": "en-US",
+                    "Regex": "(?i)Paiement\\sle\\s(?<date>(\\d\\d\\/\\d\\d\\/\\d\\d\\d\\d))",
+                    "Group": "date"
+                },
+                {
+                    "Culture": "fr-FR",
+                    "Regex": "(?i)période\\sdu\\s*\\d\\d-\\d\\d-\\d\\d\\d\\d\\s*au\\s*(?<date>\\d\\d-\\d\\d-\\d\\d\\d\\d)",
+                    "Group": "date"
+                }
+            ]
+        }
+    ]
+}
